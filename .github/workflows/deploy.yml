@@ -21,7 +21,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262  # v4
+      - uses: actions/upload-artifact@<full-commit-sha>  # ✅ CORRECT
       - uses: actions/setup-node@1a4442caab129c91fbf4faee62745a60a6794cae  # v4
         with:
           node-version: 20
