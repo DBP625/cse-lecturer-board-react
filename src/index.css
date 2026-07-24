@@ -1,0 +1,153 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: cselight --default, csedark;
+}
+
+@theme {
+  --color-primary: #0D7A56;
+  --color-primary-content: #ffffff;
+  --color-secondary: #7A4CA0;
+  --color-secondary-content: #ffffff;
+  --color-accent: #B08A2E;
+  --color-accent-content: #ffffff;
+  --color-error: #C43830;
+  --color-error-content: #ffffff;
+  --color-warning: #B07A1C;
+  --color-warning-content: #ffffff;
+  --color-success: #0D7A56;
+  --color-success-content: #ffffff;
+  --color-info: #3E6C86;
+  --color-info-content: #ffffff;
+
+  --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Source Serif 4', 'Palatino Linotype', Georgia, serif;
+  --font-mono: 'Cascadia Mono', 'SF Mono', Consolas, monospace;
+}
+
+
+
+/* DaisyUI theme overrides */
+[data-theme="cselight"] {
+  --b1: 244 245 241;    /* base-100: ground */
+  --b2: 254 254 254;    /* base-200: surface */
+  --b3: 249 250 248;    /* base-300: surface-2 */
+  --bc: 26 36 32;       /* base-content: ink */
+  --p: 13 122 86;       /* primary */
+  --pc: 255 255 255;
+  --s: 122 76 160;      /* secondary */
+  --sc: 255 255 255;
+  --a: 176 138 46;      /* accent */
+  --ac: 255 255 255;
+  --er: 196 56 48;
+  --erc: 255 255 255;
+  --wa: 176 122 28;
+  --wac: 255 255 255;
+  --su: 13 122 86;
+  --suc: 255 255 255;
+  --in: 62 108 134;
+  --inc: 255 255 255;
+  --n: 90 105 96;       /* neutral: muted */
+  --nc: 26 36 32;
+  --rounded-btn: .5rem;
+  --rounded-box: .875rem;
+}
+
+[data-theme="csedark"] {
+  --b1: 14 20 17;
+  --b2: 23 32 25;
+  --b3: 29 40 32;
+  --bc: 228 234 229;
+  --p: 78 175 134;
+  --pc: 14 20 17;
+  --s: 183 154 214;
+  --sc: 14 20 17;
+  --a: 207 161 78;
+  --ac: 14 20 17;
+  --er: 224 107 98;
+  --erc: 14 20 17;
+  --wa: 208 163 78;
+  --wac: 14 20 17;
+  --su: 78 175 134;
+  --suc: 14 20 17;
+  --in: 127 176 204;
+  --inc: 14 20 17;
+  --n: 145 160 152;
+  --nc: 228 234 229;
+  --rounded-btn: .5rem;
+  --rounded-box: .875rem;
+}
+
+/* Scroll progress bar */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, oklch(var(--p)), oklch(var(--p) / .4));
+  z-index: 100;
+  transition: width 60ms linear;
+  pointer-events: none;
+}
+
+/* Subtle dot pattern */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle, oklch(var(--n) / .15) .6px, transparent .6px);
+  background-size: 28px 28px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Scroll reveal */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .45s cubic-bezier(.4, 0, .2, 1), transform .45s cubic-bezier(.4, 0, .2, 1);
+  }
+  .reveal-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animated gradient masthead */
+.masthead-gradient {
+  position: absolute;
+  inset: -50% -25%;
+  width: 150%;
+  height: 200%;
+  background:
+    radial-gradient(ellipse at 20% 50%, oklch(var(--p) / .08) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, oklch(var(--p) / .05) 0%, transparent 50%);
+  animation: gradient-drift 12s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+@keyframes gradient-drift {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(3%, -2%) scale(1.05); }
+}
+
+/* Card hover glow */
+.card-glow {
+  transition: transform .3s cubic-bezier(.4,0,.2,1), box-shadow .3s cubic-bezier(.4,0,.2,1);
+}
+.card-glow:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px oklch(var(--p) / .12), 0 2px 8px oklch(var(--bc) / .06);
+}
+
+/* Status border colors */
+.border-state-open     { border-left-color: oklch(var(--er)); }
+.border-state-reported { border-left-color: oklch(var(--wa)); }
+.border-state-rolling  { border-left-color: oklch(var(--p)); }
+.border-state-watch    { border-left-color: oklch(var(--n)); }
+
+/* Print */
+@media print {
+  nav, .scroll-progress, .back-to-top, .btn-ghost { display: none !important; }
+  body { font-size: 12px; }
+}
